@@ -1,4 +1,6 @@
 import * as type from './actions'
+import cloneDeep from 'lodash/cloneDeep';
+
 const initialState = {
     root: {},
     schema: {}
@@ -14,19 +16,24 @@ export default function (state= initialState, action){
             }
         }
         case type.COMBINATOR_CHANGE: {
-            let root = state.root
+            let root = cloneDeep(state.root)
+            console.log(root, root[0] === state.root[0])
             for(var prop in root) {
                 // console.log('f' ,prop + ': ' + state.root[prop]);
                 if(prop === 'id') {
                     
                     if(root[prop] === action.payload.groupId) {                       
-                        root.combinator = action.payload.value                        
+                        root.combinator = action.payload.value        
                         return {
                             ...state,
-                                root: {
-                                    ...state.root,
-                                    combinator: action.payload.value}
-                        };
+                                root: root
+                        };                
+                        // return {
+                        //     ...state,
+                        //         root: {
+                        //             ...state.root,
+                        //             combinator: action.payload.value}
+                        // };
                     }
                 }
             }
