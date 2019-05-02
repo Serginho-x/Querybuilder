@@ -1,10 +1,9 @@
 import * as type from './actions';
 import cloneDeep from 'lodash/cloneDeep';
-import find from '../helpers/find';
+import find from '../helpers/find'; 
 
 const initialState = {
-    root: {},
-    schema: {}
+    root: {}
 }
 
 export default function (state=initialState, action){    
@@ -58,7 +57,7 @@ export default function (state=initialState, action){
         } 
         case type.CHANGE_SELECT: {
             let root = cloneDeep(state.root)
-            const item = find(action.payload.groupId, root);
+            const item = find(action.payload.id, root);
             switch (action.payload.name){
                 case 'combinator': {
                   item.combinator = action.payload.value;                  

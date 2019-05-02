@@ -1,7 +1,7 @@
 import uniqueId from 'uuid/v4';
 
 export const CREATE_RULE_GROUP = 'CREATE_RULE_GROUP';
-export const createRuleGroup = (group, parentId) => { 
+export const createRuleGroup = (parentId) => { 
     return {
         type: CREATE_RULE_GROUP, 
         payload: {
@@ -14,7 +14,7 @@ export const createRuleGroup = (group, parentId) => {
 };
 
 export const CREATE_RULE = 'CREATE_RULE';
-export const createRule = (rule, parentId) => { 
+export const createRule = (parentId) => { 
     return {
         type: CREATE_RULE, 
         payload: {
@@ -39,12 +39,12 @@ export const deleteItem = (groupId, parentId) => {
 };
 
 export const CHANGE_SELECT = 'CHANGE_SELECT';
-export const onChangeSelect = (value, groupId, name) => {
+export const onChangeSelect = (value, id, name) => {
     return {
         type: CHANGE_SELECT, 
         payload: { 
             value,
-            groupId,
+            id,
             name
         }
     }

@@ -18,9 +18,9 @@ export default class RuleGroup extends React.Component {
               <option value="or">OR</option>
           </select>
 
-          <button onClick={() => this.props.createRule(null, this.props.id)}>+Rule</button>
-          <button onClick={() => this.props.createRuleGroup(null, this.props.id)}>+Group</button>
-          <button disabled={this.props.parentId===null} onClick={() => this.props.deleteItem(this.props.id, this.props.parentId)}>X</button>
+          <button onClick={() => this.props.createRule(this.props.id)}>+Rule</button>
+          <button onClick={() => this.props.createRuleGroup(this.props.id)}>+Group</button>
+          <button disabled={this.props.parentId === null} onClick={() => this.props.deleteItem(this.props.id, this.props.parentId)}>X</button>
 
           {this.props.rules.map((rule) => { 
             return rule.combinator && rule.rules ? (
