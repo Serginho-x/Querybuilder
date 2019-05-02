@@ -1,68 +1,52 @@
 import React from 'react';
 import Rule from './Rule';
+import '../styles/style.css';
 
 export default class RuleGroup extends React.Component {
   static get defaultProps() {
-    return {
-      id: null,
-      parentId: null,
-      rules: [],
-      combinator: 'and',
-      schema: {}
+    return { 
+      rules: []         
     };
   }
 
-  render() {
-   
+  render() {  
     return (
-        <div style={{border: '1px solid orange', backgroundColor:'yellow'}}>
-        <select onChange={(e) => this.props.onCombinatorChange( e.target.value, this.props.id )}>
-            <option value="and">-AND</option>
-            <option value="or">OR</option>
-        </select>
+      <>
+        <div className="rule-group">
+          <select onChange={(e) => this.props.onChangeSelect(e.target.value, this.props.id, 'combinator')}>
+              <option value="and">AND</option>
+              <option value="or">OR</option>
+          </select>
 
-       <button onClick={() => null}>+Rule</button>
-       <button onClick={() => null}>+Group</button>
-       <button onClick={() => null}>X</button>
-        </div>
-)
-     
-    
-  }
+          <button onClick={() => this.props.createRule(null, this.props.id)}>+Rule</button>
+          <button onClick={() => this.props.createRuleGroup(null, this.props.id)}>+Group</button>
+          <button disabled={this.props.parentId===null} onClick={() => this.props.deleteItem(this.props.id, this.props.parentId)}>X</button>
 
-  hasParentGroup() {
-    return this.props.parentId;
-  }
-
-  onCombinatorChange = (value) => {
-    const { onPropChange } = this.props.schema;
-
-    onPropChange('combinator', value, this.props.id);
-  };
-
-  addRule = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-
-    const { createRule, onRuleAdd } = this.props.schema;
-
-    const newRule = createRule();
-    onRuleAdd(newRule, this.props.id);
-  };
-
-  addGroup = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-
-    const { createRuleGroup, onGroupAdd } = this.props.schema;
-    const newGroup = createRuleGroup();
-    onGroupAdd(newGroup, this.props.id);
-  };
-
-  removeGroup = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-
-    this.props.schema.onGroupRemove(this.props.id, this.props.parentId);
-  };
+          {this.props.rules.map((rule) => { 
+            return rule.combinator && rule.rules ? (
+              <RuleGroup 
+                  key={rule.id}
+                  id={rule.id}
+                  parentId={this.props.id}
+                  rules={rule.rules}              
+                  onChangeSelect={this.props.onChangeSelect}                 
+                  createRuleGroup={this.props.createRuleGroup}
+                  createRule={this.props.createRule}
+                  deleteItem={this.props.deleteItem}                
+                  
+              />
+            ) : (
+              <Rule 
+                key={rule.id}
+                id={rule.id}
+                parentId={this.props.id}
+                onChangeSelect={this.props.onChangeSelect}
+                deleteItem={this.props.deleteItem}
+              />
+            )
+          })}
+        </div>    
+      </>
+    )
+  } 
 }

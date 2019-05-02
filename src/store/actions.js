@@ -1,48 +1,51 @@
 import uniqueId from 'uuid/v4';
 
 export const CREATE_RULE_GROUP = 'CREATE_RULE_GROUP';
-
-export const createRuleGroup = () => { 
+export const createRuleGroup = (group, parentId) => { 
     return {
         type: CREATE_RULE_GROUP, 
         payload: {
-        id: `g-${uniqueId()}`,
-        rules: [],
-        combinator: "and"
-    }
-    }
-  };
-
-export const COMBINATOR_CHANGE = 'COMBINATOR_CHANGE';
-export const onCombinatorChange = (value, groupId) => {
-   
-    // const group = dispatch(findRule(ruleId));
-    // Object.assign(rule, { [prop]: value });
-    return {
-        type: COMBINATOR_CHANGE, 
-        payload: { 
-            value: value,
-            groupId: groupId 
+            id: `g-${uniqueId()}`,
+            rules: [],
+            combinator: "and",
+            parentId
         }
-  }
+    }
+};
+
+export const CREATE_RULE = 'CREATE_RULE';
+export const createRule = (rule, parentId) => { 
+    return {
+        type: CREATE_RULE, 
+        payload: {
+            id: `r-${uniqueId()}`,
+            field: "firstName",
+            value: "",
+            operator: "null",
+            parentId
+        }
+    }
+};
+
+export const DELETE_ITEM = 'DELETE_ITEM';
+export const deleteItem = (groupId, parentId) => { 
+    return {
+        type: DELETE_ITEM, 
+        payload: {
+            groupId,
+            parentId
+        }
+    }
+};
+
+export const CHANGE_SELECT = 'CHANGE_SELECT';
+export const onChangeSelect = (value, groupId, name) => {
+    return {
+        type: CHANGE_SELECT, 
+        payload: { 
+            value,
+            groupId,
+            name
+        }
+    }
 }
-
-// const findRule = (id, parent) => {
-   
-//     const { isRuleGroup } = this.state.schema;
-
-//     if (parent.id === id) {
-//       return parent;
-//     }
-
-//     for (const rule of parent.rules) {
-//       if (rule.id === id) {
-//         return rule;
-//       } else if (isRuleGroup(rule)) {
-//         const subRule = this._findRule(id, rule);
-//         if (subRule) {
-//           return subRule;
-//         }
-//       }
-//     }
-//   }
