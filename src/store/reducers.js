@@ -30,11 +30,9 @@ export default function (state = initialState, action) {
       parent.rules.splice(index, 1);
       return {...state, root}
     }
-    case type.CHANGE_SELECT: {
-      const parent = find(action.payload.parentId, root);
-      const item = omit(action.payload, ['parentId', '__v', '_id']);
-      const index = parent.rules.findIndex((child) => child.id === action.payload.id);
-      parent.rules.splice(index, 1, item);
+    case type.CHANGE_SELECT: {      
+      const object = find(action.payload.id, root);
+      object[action.payload.name]=action.payload.value
       return {...state, root};
     }
     default:

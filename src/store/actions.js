@@ -71,7 +71,7 @@ export const CHANGE_SELECT = 'CHANGE_SELECT';
 export const onChangeSelect = (value, id, name) => {
     return async (dispatch) => {
         try { 
-            const response = await axios.put(`${rulesUrl}/${id}`, {value, name});
+            const response = await axios.put(`${rulesUrl}/${id}`, {value, name});           
             dispatch({
                 type: CHANGE_SELECT, 
                 payload: response.data
