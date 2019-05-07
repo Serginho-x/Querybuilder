@@ -8,7 +8,11 @@ export default class RuleGroup extends React.Component {
     return (
       <>
         <div className="rule-group">
-          <select disabled={this.props.id === 'root-id'} defaultValue={this.props.combinator} onChange={(e) => this.props.onChangeSelect(e.target.value, this.props.id, 'combinator')}>
+          <select 
+              disabled={this.props.id === 'root-id'}
+              defaultValue={this.props.combinator}
+              onChange={(e) => this.props.onChangeSelect(e.target.value, this.props.id, 'combinator')}
+          >
               <option value="and">AND</option>
               <option value="or">OR</option>
           </select>
