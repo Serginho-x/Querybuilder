@@ -1,5 +1,5 @@
 const find = (id, parent) => {
-  if(id === null) {
+  if(id === 'root-id') {
     return parent;
   }
 

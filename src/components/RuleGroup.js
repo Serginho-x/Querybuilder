@@ -3,24 +3,19 @@ import Rule from './Rule';
 import '../styles/style.css';
 
 export default class RuleGroup extends React.Component {
-  static get defaultProps() {
-    return { 
-      rules: []         
-    };
-  }
-
-  render() {  
+  
+  render() { 
     return (
       <>
         <div className="rule-group">
-          <select onChange={(e) => this.props.onChangeSelect(e.target.value, this.props.id, 'combinator')}>
+          <select disabled={this.props.id === 'root-id'} defaultValue={this.props.combinator} onChange={(e) => this.props.onChangeSelect(e.target.value, this.props.id, 'combinator')}>
               <option value="and">AND</option>
               <option value="or">OR</option>
           </select>
 
           <button onClick={() => this.props.createRule(this.props.id)}>+Rule</button>
           <button onClick={() => this.props.createRuleGroup(this.props.id)}>+Group</button>
-          <button disabled={this.props.parentId === null} onClick={() => this.props.deleteItem(this.props.id, this.props.parentId)}>X</button>
+          <button disabled={this.props.id === 'root-id'} onClick={() => this.props.deleteItem(this.props.id)}>X</button>
 
           {this.props.rules.map((rule) => { 
             return rule.combinator && rule.rules ? (
@@ -32,7 +27,8 @@ export default class RuleGroup extends React.Component {
                   onChangeSelect={this.props.onChangeSelect}                 
                   createRuleGroup={this.props.createRuleGroup}
                   createRule={this.props.createRule}
-                  deleteItem={this.props.deleteItem}                
+                  deleteItem={this.props.deleteItem}
+                  combinator={rule.combinator}             
                   
               />
             ) : (
@@ -42,6 +38,9 @@ export default class RuleGroup extends React.Component {
                 parentId={this.props.id}
                 onChangeSelect={this.props.onChangeSelect}
                 deleteItem={this.props.deleteItem}
+                operator={rule.operator}
+                field={rule.field}
+                value={rule.value}
               />
             )
           })}

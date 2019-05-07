@@ -5,12 +5,16 @@ import RuleGroup from './RuleGroup';
 import '../styles/style.css';
 
 class Main extends React.Component {
+  componentDidMount(){
+    this.props.getRoot()
+  }
+
   render() {
     return (
       <div className="container">
         <div className="group">
           <RuleGroup
-            id={null}
+            id='root-id'
             parentId={null}
             rules={this.props.root.rules}
             onChangeSelect={this.props.onChangeSelect}

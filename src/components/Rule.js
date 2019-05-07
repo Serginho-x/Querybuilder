@@ -7,7 +7,10 @@ export default class Rule extends React.Component {
         return (
             <>
                 <div className="rule">
-                    <select onChange={(e) => this.props.onChangeSelect(e.target.value, this.props.id, 'field')}>
+                    <select 
+                        defaultValue={this.props.field}
+                        onChange={(e) => this.props.onChangeSelect(e.target.value, this.props.id, 'field')}
+                    >
                         <option value="firstName">First Name</option>
                         <option value="lastName">Last Name</option>
                         <option value="age">Age</option>
@@ -16,14 +19,17 @@ export default class Rule extends React.Component {
                         <option value="email">Email</option>
                         <option value="email">Twitter</option>
                     </select>
-                    <select onChange={(e) => this.props.onChangeSelect(e.target.value, this.props.id, 'operator')}>
+                    <select 
+                        defaultValue={this.props.operator}
+                        onChange={(e) => this.props.onChangeSelect(e.target.value, this.props.id, 'operator')}
+                    >
                         <option value=">">></option>
                         <option value="<">+</option>
                         <option value="!=">!=</option>
                         <option value="=">=</option>
                     </select>
-                    <input type="text" onChange={(e) => this.props.onChangeSelect(e.target.value, this.props.id, 'value')}></input>
-                    <button onClick={() => this.props.deleteItem(this.props.id, this.props.parentId)}>X</button>
+                    <input type="text" value={this.props.value} onChange={(e) => this.props.onChangeSelect(e.target.value, this.props.id, 'value')}></input>
+                    <button onClick={() => this.props.deleteItem(this.props.id)}>X</button>
                 </div>
             </>
         )
