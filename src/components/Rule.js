@@ -9,7 +9,7 @@ export default class Rule extends React.Component {
                 <div className="rule">
                     <select 
                         defaultValue={this.props.field}
-                        onChange={(e) => this.props.onChangeSelect(e.target.value, this.props.id, 'field')}
+                        onChange={(e) => this.props.updateItem(e.target.value, this.props._id, 'field')}
                     >
                         <option value="firstName">First Name</option>
                         <option value="lastName">Last Name</option>
@@ -21,15 +21,15 @@ export default class Rule extends React.Component {
                     </select>
                     <select 
                         defaultValue={this.props.operator}
-                        onChange={(e) => this.props.onChangeSelect(e.target.value, this.props.id, 'operator')}
+                        onChange={(e) => this.props.updateItem(e.target.value, this.props._id, 'operator')}
                     >
                         <option value=">">></option>
                         <option value="<">+</option>
                         <option value="!=">!=</option>
                         <option value="=">=</option>
                     </select>
-                    <input type="text" value={this.props.value} onChange={(e) => this.props.onChangeSelect(e.target.value, this.props.id, 'value')}></input>
-                    <button onClick={() => this.props.deleteItem(this.props.id)}>X</button>
+                    <input type="text" value={this.props.value} onChange={(e) => this.props.updateItem(e.target.value, this.props._id, 'value')}></input>
+                    <button onClick={() => this.props.deleteRule(this.props._id)}>X</button>
                 </div>
             </>
         )

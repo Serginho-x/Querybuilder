@@ -3,8 +3,23 @@
     display: flex;
     justify-content: space-between
 }
-.group {  
-    width: 100%;
+
+.root-container {
+    margin: 5px 0px;
+    width: 150px;
+}
+
+.root-list {
+    margin-top: 10px;
+}
+
+.root-select { 
+    width: 82%;
+    margin: 5px auto;
+}
+
+.group {      
+    width: 65%;
 }
 
 .rule-group {
@@ -17,7 +32,25 @@
 .rule {
     margin: 5px;
 }
+
 .query {
-    width: 40%;
+    width: 35%;
     padding-left: 10px;
+}
+
+.button {
+    width: 150px;
+    color: green
+}
+
+.input {
+    width: 146px;
+}
+
+.margin-left {
+    margin-left: 10px;
+}
+
+.hidden {
+    display: none;
 }
